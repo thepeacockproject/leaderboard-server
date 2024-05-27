@@ -1143,15 +1143,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"argon2@npm:^0.40.1":
-  version: 0.40.1
-  resolution: "argon2@npm:0.40.1"
+"argon2@npm:^0.40.3":
+  version: 0.40.3
+  resolution: "argon2@npm:0.40.3"
   dependencies:
     "@phc/format": "npm:^1.0.0"
-    node-addon-api: "npm:^7.1.0"
+    node-addon-api: "npm:^8.0.0"
     node-gyp: "npm:latest"
     node-gyp-build: "npm:^4.8.0"
-  checksum: 10/18b7fcba7a0e03b43a25ec89b8f820ff021d2c3b0884fa96ea94f87a2a42e2568e1d26e354e87173ab0dc7459a0998cd430a2c7da0fe3a1ded3aff1dc05d3af7
+  checksum: 10/3b05621118b5ca894de41fe1456a57c68e68322bd8d5fe3755ff666b62a63d790fe45771ee4c0e6d4be35e9cfa7a6550330c9a257934fa1df792f073ace9b7c4
   languageName: node
   linkType: hard
 
@@ -1219,7 +1219,7 @@ __metadata:
     "@types/jquery": "npm:^3.5.30"
     "@types/jsonwebtoken": "npm:^9.0.6"
     "@types/node": "npm:^20.12.12"
-    argon2: "npm:^0.40.1"
+    argon2: "npm:^0.40.3"
     axios: "npm:^1.6.8"
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.1"
@@ -3405,12 +3405,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-addon-api@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "node-addon-api@npm:7.1.0"
+"node-addon-api@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "node-addon-api@npm:8.0.0"
   dependencies:
     node-gyp: "npm:latest"
-  checksum: 10/e20487e98c76660f4957e81e85c45dfb667140d9be0bf872a3b3dfd86b4ea19c0275939116c90efebc0da7fc6af2c7b7b060512ceebe6417b1ed145a26910453
+  checksum: 10/a9b3a1b5d7236bfc4cb2e781f14786ef5526f2be095f4fad1684b6374253336b3a70f2333605f2d8a6e4e0cb9ecf186ac21250328833fda7fe3e8b32910d1297
   languageName: node
   linkType: hard
 
