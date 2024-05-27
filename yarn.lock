@@ -1224,7 +1224,7 @@ __metadata:
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.1"
     cookie-parser: "npm:^1.4.6"
-    datatables.net: "npm:^2.0.6"
+    datatables.net: "npm:^2.0.7"
     dotenv: "npm:^16.4.5"
     ejs: "npm:^3.1.10"
     jquery: "npm:^3.7.1"
@@ -1777,12 +1777,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"datatables.net@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "datatables.net@npm:2.0.6"
+"datatables.net@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "datatables.net@npm:2.0.7"
   dependencies:
     jquery: "npm:>=1.7"
-  checksum: 10/33f55b9f797636ec0cf6197e371a12c757cc0e93c85e219fd06e5c722c1b6967e63181c0c25da1f518e08e851fed177913ba950b045708fd3f9c1bf62a80a326
+  checksum: 10/d6194b48b58ac4752bb8ef971fd7d57c3874013cd85b320b47aeb1c4d59e960d9610a3608b4e5ca10f892b448b4cbd293c1f4a9f2708d7b57fa62787e7ed5023
   languageName: node
   linkType: hard
 
