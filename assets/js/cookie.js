@@ -1,4 +1,4 @@
-yafunction addTime(time) {
+function addTime(time) {
     const date = new Date()
     date.setTime(date.getTime() + time)
     return date
