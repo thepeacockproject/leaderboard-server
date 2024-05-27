@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../gen"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// An administrator.
+model AdminUser {
+  /// The administrator's unique ID.
+  id          Int    @id @default(autoincrement())
+  /// The administrator's username.
+  displayName String @unique
+  /// The administrator's access token.
+  uid         String @unique @db.Uuid
+}
+
+/// A contract is a single HITMAN contract, which can be played on multiple platforms.
+/// A different row will be used for each platform, game version, and difficulty.
+model Contract {
+  /// The contract's unique database ID (only used by this service, not by the game).
+  id          Int                   @id @default(autoincrement())
+  /// The contract's unique ID (used by the game).
+  contractId  String                @db.Uuid
+  /// The contract's difficulty.
+  difficulty  LeaderboardDifficulty
+  /// The contract's game version.
+  gameVersion GameVersion
+  /// The platform that the contract is played on.
+  platform    Platform
+  score       LeaderboardScore[]
+}
+
+/// A leaderboard score for a contract.
+model LeaderboardScore {
+  /// The score's unique database ID.
+  id         Int      @id @default(autoincrement())
+  /// The total score.
+  score      Int
+  /// The user's display name.
+  username   String
+  /// The user's platform ID (Steam ID, Epic ID, etc).
+  platformId String
+  /// The score payload.
+  data       Json
+  /// The contract this score is for's database ID.
+  contractId Int      @map("contract_id")
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "contract_id")
+}
+
+/// All supported HITMAN games' major versions.
+enum GameVersion {
+  /// HITMAN: Sniper Assassin (HITMAN 2 pre-order bonus).
+  scpc
+  /// HITMAN (2016).
+  h1
+  /// HITMAN 2.
+  h2
+  /// HITMAN World of Assassination (formerly HITMAN 3).
+  h3
+}
+
+/// The possible platforms that a contract can be played on.
+enum Platform {
+  /// The Steam platform.
+  steam
+  /// The Epic Games Store platform.
+  epic
+  /// The GOG platform (2016 only, and no longer actively sold here).
+  gog
+  /// The Xbox platform (game pass only).
+  scarlett
+}
+
+/// The possible difficulties that a contract can be played on.
+enum LeaderboardDifficulty {
+  /// No set difficulty (difficulty selection is disabled).
+  unset
+  /// The easiest difficulty (H2/H3 only).
+  casual
+  /// The normal difficulty, also known as Professional in H2/H3, but Normal in H1.
+  normal
+  /// The hardest difficulty, also known as Master in H2/H3, but Professional in H1.
+  master
+}

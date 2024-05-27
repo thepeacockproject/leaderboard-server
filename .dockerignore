@@ -1,0 +1,5 @@
+build
+gen
+node_modules
+.yarn/cache
+.git

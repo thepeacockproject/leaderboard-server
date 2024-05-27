@@ -1,0 +1,195 @@
+<body>
+    <header>
+        <nav class="navbar">
+            <a class="navbar-brand white">Leaderboard Moderation</a>
+
+            <button class="btn" onclick="logout()">
+                Log Out (<%= adminUser.name %>)
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="centered">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="contractId">Contract ID</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="contractId"
+                        placeholder="173ec84a-f4d0-4965-86b4-bfeff6019b07"
+                    />
+                </div>
+
+                <div
+                    id="legend-versions"
+                    class="form-check form-check-inline form-group"
+                ></div>
+
+                <div
+                    id="legend-difficulties"
+                    class="form-check form-check-inline form-group"
+                ></div>
+
+                <div
+                    id="legend-platforms"
+                    class="form-check form-check-inline form-group"
+                ></div>
+            </form>
+        </div>
+
+        <div class="centered">
+            <button class="btn btn-outline-success margin-top" onclick="update()">
+                Get Data
+            </button>
+        </div>
+
+        <table id="contract-entries">
+            <thead>
+                <tr>
+                    <th>Place</th>
+                    <th>Platform ID</th>
+                    <th>Display Name</th>
+                    <th>Total Score</th>
+                    <th>Internal ID</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+</body>
+
+<script>
+    const gameVersions = [
+        <% for (const version of dbGameVersions) { %>
+            "<%= version %>",
+        <% } %>
+    ]
+
+    const gameDifficulties = [
+        <% for (const difficulty of dbGameDifficulties) { %>
+            "<%= difficulty %>",
+        <% } %>
+    ]
+
+    const gamePlatforms = [
+        <% for (const platform of dbPlatforms) { %>
+            "<%= platform %>",
+        <% } %>
+    ]
+
+    let contractId = null
+    let difficulty = null
+    let gameVersion = null
+    let platform = null
+
+    jQuery(($) => {
+        const entriesTable = $("#contract-entries")
+        entriesTable.DataTable()
+
+        const entriesTableWrapper = $("contract-entries_wrapper")
+        entriesTableWrapper.hide()
+
+        const versions = $("#legend-versions")
+        $.each(gameVersions, (index, version) => {
+            const label = $(`<label class="form-check-input" for="${version}">${version}</label>`)
+            const input = $(`<input class="form-check-label" type="radio" class="form-check-input" id="${version}" name="gameVersion" value="${version}" />`)
+            versions.append(input)
+            versions.append(label)
+        })
+
+        versions.on("change", (event) => {
+            gameVersion = event.target.value
+        })
+
+        const difficulties = $("#legend-difficulties")
+        $.each(gameDifficulties, (index, difficulty) => {
+            const label = $(`<label class="form-check-input" for="${difficulty}">${difficulty}</label>`)
+            const input = $(`<input class="form-check-label" type="radio" id="${difficulty}" name="difficulty" value="${difficulty}" />`)
+            difficulties.append(input)
+            difficulties.append(label)
+        })
+
+        difficulties.on("change", (event) => {
+            difficulty = event.target.value
+        })
+
+        const platforms = $("#legend-platforms")
+        $.each(gamePlatforms, (index, platform) => {
+            const label = $(`<label class="form-check-input" for="${platform}">${platform}</label>`)
+            const input = $(`<input class="form-check-label" type="radio" id="${platform}" name="platform" value="${platform}" />`)
+            platforms.append(input)
+            platforms.append(label)
+        })
+
+        platforms.on("change", (event) => {
+            platform = event.target.value
+        })
+
+        $("#contractId").on("change", (event) => {
+            contractId = event.target.value
+        })
+    })
+
+    function update() {
+        if (!contractId) {
+            alert("Please enter a proper contract ID!")
+            return
+        }
+
+        if (difficulty === null) {
+            alert("Please select a difficulty!")
+            return
+        }
+
+        if (gameVersion === null) {
+            alert("Please select a game version!")
+            return
+        }
+
+        if (platform === null) {
+            alert("Please select a platform!")
+            return
+        }
+
+        console.group("new filter params")
+        console.debug(`contract`, contractId)
+        console.debug(`difficulty`, difficulty)
+        console.debug(`gameVersion`, gameVersion)
+        console.debug(`platform`, platform)
+        console.groupEnd()
+
+        fetch(`/leaderboards/entries/${contractId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                difficulty,
+                gameVersion,
+                platform
+            }),
+        }).then(async (resp) => {
+            const data = await resp.json()
+            const entriesTable = $("#contract-entries")
+
+            console.log(data)
+
+            entriesTable.DataTable().destroy()
+            entriesTable.DataTable({
+                data: data.map((entry, index) => {
+                    return [
+                        index + 1,
+                        entry.platformId,
+                        entry.LeaderboardData.Player.displayName,
+                        entry.LeaderboardData.Score,
+                        entry.entryId,
+                    ]
+                }),
+            })
+        }).catch((err) => {
+            console.error(err)
+        })
+    }
+</script>

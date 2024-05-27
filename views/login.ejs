@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <script src="/js/cookie.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h1>Please log in</h1>
+    <p>After you have entered your token, please reload the page.</p>
+</body>
+
+<script>
+    const authToken = prompt(
+        "Authentication token (contact an administrator to obtain):"
+    )
+
+    if (!authToken) {
+        alert("Error: you must enter a valid token to continue.")
+        window.location.reload()
+    }
+
+    window.cookieImpl.set("authToken", authToken, 365, "d", ";secure")
+    window.location.replace("<%- next %>")
+</script>
+</html>

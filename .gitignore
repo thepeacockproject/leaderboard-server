@@ -1,0 +1,16 @@
+package-lock.json
+node_modules
+build
+.yarn/cache
+.yarn/install-state.gz
+/tsconfig.tsbuildinfo
+.env
+chat.txt
+tsconfig.build.tsbuildinfo
+.vsls.json
+.env.*
+tmp/
+.idea/dataSources
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+gen
