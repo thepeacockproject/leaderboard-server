@@ -296,9 +296,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/platform-express@npm:^10.3.6":
-  version: 10.3.6
-  resolution: "@nestjs/platform-express@npm:10.3.6"
+"@nestjs/platform-express@npm:^10.3.9":
+  version: 10.3.9
+  resolution: "@nestjs/platform-express@npm:10.3.9"
   dependencies:
     body-parser: "npm:1.20.2"
     cors: "npm:2.8.5"
@@ -308,7 +308,7 @@ __metadata:
   peerDependencies:
     "@nestjs/common": ^10.0.0
     "@nestjs/core": ^10.0.0
-  checksum: 10/2828b4c88f8f994ea79c6e2dd266ee2da50b4c35beb8a8d32445d43651479d5202164d3810b7c005cb1ceed15b79032377f8934e9243185b0d3d939a6517f13c
+  checksum: 10/3fa49827355239c99882ed83e021f334851ffd12a17ff9a705f1dbc0fcee134dfc0795841aca0dc25663de8ce1628fbbeb338e185e8fb0f1515769657d317f7e
   languageName: node
   linkType: hard
 
@@ -1208,7 +1208,7 @@ __metadata:
     "@nestjs/cli": "npm:^10.3.2"
     "@nestjs/common": "npm:^10.3.8"
     "@nestjs/core": "npm:^10.3.8"
-    "@nestjs/platform-express": "npm:^10.3.6"
+    "@nestjs/platform-express": "npm:^10.3.9"
     "@nestjs/throttler": "npm:^5.1.2"
     "@octokit/rest": "npm:^20.1.1"
     "@prisma/client": "npm:^5.11.0"
